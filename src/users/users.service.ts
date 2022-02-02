@@ -24,6 +24,15 @@ export class UsersService {
               }
           })
       }
+      
+      async findByCredentials(email: string, password: string) {
+          return await this.usersRepository.findOne({
+              where: {
+                  email: email, 
+                  password: password
+              }
+          })
+      }
       async updateOne(id: number) {
           const data = {email: "test@gmail.com", password: "passchanged"};
           await this.usersRepository.update({id}, data);
