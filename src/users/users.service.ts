@@ -24,6 +24,13 @@ export class UsersService {
               }
           })
       }
+      async findUserByPayload(email: string){
+          return await this.usersRepository.findOne({
+              where: {
+                  email: email
+              }
+          })
+      }
       
       async findByCredentials(email: string, password: string) {
           return await this.usersRepository.findOne({

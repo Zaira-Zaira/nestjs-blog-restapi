@@ -1,7 +1,9 @@
-import { Controller, HttpStatus, Get, Param, Post, Res, Put, Body, Delete } from '@nestjs/common';
-import { response } from 'express';
+import { Controller, HttpStatus, Get, Param, Post, Res, Put, Body, Delete, Req } from '@nestjs/common';
+import { Response, response } from 'express';
+import { AppService } from 'src/app.service';
 import { CreateUserDTO } from './create.user.dto';
 import { UsersService } from './users.service';
+
 
 @Controller('users')
 export class UsersController {
@@ -13,7 +15,7 @@ export class UsersController {
       return {
         statusCode: HttpStatus.OK,
         message: 'Users fetched successfully',
-        users
+        users,
       };
     }
 
@@ -25,6 +27,17 @@ export class UsersController {
         message: "User has been found by his id", 
         user,
       };
+    }
+
+    async findUserByPayload(@Req() request){
+      const {email} = request.body;
+
+      const user = this.usersService.findUserByPayload(email);
+
+      return {
+        message: "user founded by payload",
+        user
+      }
     }
     @Put(':id')
     async updateOne(@Param('id') id: number) {
@@ -55,4 +68,5 @@ export class UsersController {
         message: "user deleted", 
       }
     }
+
 }

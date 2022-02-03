@@ -12,6 +12,7 @@ import { ArticlesController } from './articles/articles.controller';
 import { ArticlesService } from './articles/articles.service';
 import { ArticlesModule } from './articles/articles.module';
 import { Articles } from './articles/articles.entity';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [

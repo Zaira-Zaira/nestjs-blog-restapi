@@ -8,7 +8,12 @@ import { AuthentificationService } from './authentification.service';
 
 @Module({
     imports: [
-        UsersModule
+        UsersModule, 
+        PassportModule,
+        JwtModule.register({
+            secret: 'SECRET',
+            signOptions: { expiresIn: '60s' },
+          }),
     ],
     providers: [AuthentificationService],
     controllers: [AuthentificationController],
